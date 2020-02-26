@@ -84,3 +84,60 @@ A third party service that facillitates several parts of the client & server jou
 
 In a future iteration, users should be able to self-host their hubs and connect to other hubs that support the same transport mechanisms.
 
+
+## UX Sketch
+
+
+### Client
+
+```
+# Install and start the payment proxy
+
+$ npm install -g purl
+$ purl
+Opening a channel with hub.purl.io ...
+You have $10 free credit.
+Listening on localhost:8042
+
+[2020-02-28 10:49:12] Forwarding #24a69c42... (max $0.001) to demo.purl.io
+[2020-02-28 10:49:12] Paid $0.00042 for #24a69c42... to demo.purl.io
+
+# Send a paid request
+
+$ curl --proxy localhost:8042 demo.purl.io
+{
+    "message": "it works"
+}
+```
+
+
+### Server
+
+```
+# Install and run the payment server proxy
+$ npm install -g purl
+$ purl-server
+Opening a channel with hub.purl.io ...
+You're all set! Listening for incoming requests.
+
+[2020-02-28 10:49:12] Serving #24a69c42... (max $0.001) via localhost:8888
+[2020-02-28 10:49:12] Charged $0.00042 for #24a69c42
+
+# Withdraw funds
+$ purl-server withdraw 0x1234
+Sending $0.0042 to 0x1234 ... done!
+```
+
+
+### Hub
+
+```
+Install and run the payment hub server
+$ npm install -g purl
+$ purl-hub
+
+[2020-02-28 10:49:12] Opening a channel with 0xcccc +$10 ... done.
+[2020-02-28 10:49:13] Approving a virtual channel +$1 between 0xcccc and 0x5555
+
+```
+
