@@ -80,9 +80,9 @@ A third party service that facillitates several parts of the client & server jou
 
 - State channel funding / management / backup
 
-- Custodial operations
+- Custodial operations (we might want to delegate this to a different group of actors?)
 
-In a future iteration, users should be able to self-host their hubs and connect to other hubs that support the same transport mechanisms.
+In a future iteration, users should be able to self-host their hubs and connect to other hubs that support the same transport mechanisms (asset x channel architectures).
 
 
 ## UX Sketch
@@ -144,10 +144,10 @@ $ purl-hub
 
 ## Challenges
 
-- Deal with concurrency (multiple virtual channels between **C** and **S**, as each channel needs to process the request/response flow sequentially).
+- Deal with concurrency (create multiple virtual channels between **C** and **S**, as each channel needs to process the request/response flow sequentially).
 
     - Prevent double spends via concurrent requests
 
 - Deal with network failures at various stages (assign unique IDs to requests and establish request idempotency). Clients can retry the same request at no cost (if they didn't get back a response due to network failures). Servers can cache the responses for a limited time window.
 
-- Deal with key security - in production scenatios, both clients and servers will most likely choose to delegate custody to a third party (can the hub act as a custodian as well?)
+- Deal with key security - in production scenatios, both clients and servers will most likely choose to delegate custody to a third party (can/should the hub act as a custodian?)
