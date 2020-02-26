@@ -136,8 +136,18 @@ Install and run the payment hub server
 $ npm install -g purl
 $ purl-hub
 
-[2020-02-28 10:49:12] Opening a channel with 0xcccc +$10 ... done.
-[2020-02-28 10:49:13] Approving a virtual channel +$1 between 0xcccc and 0x5555
+[2020-02-28 10:49:12] Opening a $10 channel with client 0xcccc ... done.
+[2020-02-28 10:49:12] Opening a $10 channel with server 0x5555 ... done.
+[2020-02-28 10:49:13] Approving a $1 virtual channel between 0xcccc and 0x5555
 
 ```
 
+## Challenges
+
+- Deal with concurrency (multiple virtual channels between **C** and **S**, as each channel needs to process the request/response flow sequentially).
+
+    - Prevent double spends via concurrent requests
+
+- Deal with network failures at various stages (assign unique IDs to requests and establish request idempotency). Clients can retry the same request at no cost (if they didn't get back a response due to network failures). Servers can cache the responses for a limited time window.
+
+- Deal with key security - in production scenatios, both clients and servers will most likely choose to delegate custody to a third party (can the hub act as a custodian as well?)
