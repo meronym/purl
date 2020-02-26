@@ -20,13 +20,13 @@ Main actors: the Client (**C**), the Server (**S**), the Hub (**H**).
 
     - **C** generates a "cheque" that allows **S** to spend *at most $X* for processing the request.
 
-    - **C** attaches the cheque as a `Payment` header to the request and sends it to the server.
+    - **C** attaches the cheque as a `Payment` header to the request and sends it to **S**.
 
 3. **S** validates the `Payment` header and processes the request.
 
-    - **S** deducts the price for the request and generates an updated cheque that refunds the difference to the client.
+    - **S** deducts the price for the request and generates an updated cheque that refunds the difference to **C**.
 
-    - **S** attaches the cheque as a `Payment` header to the response.
+    - **S** attaches the cheque as a `Payment` header to the response and sends it to **C**.
 
  
 ### Design goals
